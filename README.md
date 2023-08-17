@@ -12,10 +12,10 @@
 | Required | Parameter                       | Description                                  | Type                    | Default |
 | :------: | :------------------------------ | :------------------------------------------- | :---------------------- | :------ |
 |    ✓     | `package_path`                  | Path to the UnityPackage.                    | `string`                |         |
-|    ✓     | `icon_path`                     | Path to the icon file.                       | `string`                |         |
+|    ✓     | `icon_path`                     | Path to the icon file. Must be a `png`.     | `string`                |         |
 |          | `package_not_found_behavior`    | What to do if the package file is not found. | [`behavior`](#behavior) | `fail`  |
 |          | `icon_not_found_behavior`       | What to do if the icon file is not found.    | [`behavior`](#behavior) | `fail`  |
-|          | `icon_already_present_behavior` | What to do if an icon is already present.   | [`behavior`](#behavior) | `fail`  |
+|          | `icon_already_present_behavior` | What to do if an icon is already present.    | [`behavior`](#behavior) | `fail`  |
 
 ### Behavior
 
