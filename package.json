@@ -13,6 +13,7 @@
     },
     "license": "GPL-3.0-or-later",
     "dependencies": {
+        "@actions/core": "^1.10.0",
         "tar": "^6.1.15"
     },
     "devDependencies": {

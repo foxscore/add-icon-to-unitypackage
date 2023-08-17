@@ -1,6 +1,7 @@
 const fs = require('fs');
-const {execSync} = require('child_process');
 const tar = require('tar');
+const core = require('@actions/core');
+const {execSync} = require('child_process');
 
 // eslint-disable-next-line no-undef
 const unityPackagePath = process.env.INPUT_PACKAGE_PATH;
@@ -14,46 +15,52 @@ console.log('Validating inputs...');
 // Make sure the behaviour flags are valid
 const validBehaviors = ['fail', 'warn', 'ignore'];
 if (!validBehaviors.includes(iconNotFoundBehavior)) {
-    throw new Error(`Invalid icon not found behavior: ${iconNotFoundBehavior}`);
+    core.setFailed(`Invalid icon not found behavior: ${iconNotFoundBehavior}`);
+    return;
 }
 if (!validBehaviors.includes(packageNotFoundBehavior)) {
-    throw new Error(
-        `Invalid package not found behavior: ${packageNotFoundBehavior}`,
+    core.setFailed(
+        `Invalid Unity Package not found behavior: ${packageNotFoundBehavior}`,
     );
+    return;
 }
 
 // Make sure the Icon ends with .png and exists
 if (!iconPath.endsWith('.png')) {
-    throw new Error(`Icon path must end with .png: ${iconPath}`);
+    core.setFailed(`Icon path must end with .png: ${iconPath}`);
+    return;
 }
 if (!fs.existsSync(iconPath)) {
     switch (iconNotFoundBehavior) {
     case 'fail':
-        throw new Error(`Icon not found at path: ${iconPath}`);
+        core.setFailed(`Icon not found at path: ${iconPath}`);
+        return;
     case 'warn':
-        console.warn(`Icon not found at path: ${iconPath}`);
+        core.warning(`Icon not found at path: ${iconPath}`);
         return;
     case 'ignore':
-        console.log(`Icon not found at path: ${iconPath}`);
+        core.info(`Icon not found at path: ${iconPath}`);
         return;
     }
 }
 
 // Make sure the Unity Package ends with .unitypackage and exists
 if (!unityPackagePath.endsWith('.unitypackage')) {
-    throw new Error(
+    core.setFailed(
         `Unity Package path must end with .unitypackage: ${unityPackagePath}`,
     );
+    return;
 }
 if (!fs.existsSync(unityPackagePath)) {
     switch (packageNotFoundBehavior) {
     case 'fail':
-        throw new Error(`Unity Package not found at path: ${unityPackagePath}`);
+        core.setFailed(`Unity Package not found at path: ${unityPackagePath}`);
+        return;
     case 'warn':
-        console.warn(`Unity Package not found at path: ${unityPackagePath}`);
+        core.warning(`Unity Package not found at path: ${unityPackagePath}`);
         return;
     case 'ignore':
-        console.log(`Unity Package not found at path: ${unityPackagePath}`);
+        core.info(`Unity Package not found at path: ${unityPackagePath}`);
         return;
     }
 }
@@ -84,7 +91,8 @@ tar.list({
     sync: true,
 });
 if (filenames.includes(iconFile)) {
-    console.warn(`Found existing icon file, overwriting...`);
+    // console.warn(`Found existing icon file, overwriting...`);
+    core.warning(`Found existing icon file, overwriting...`);
     execSync(`tar --delete --file=${tempDir}/archtemp.tar '${iconFile}'`);
 }
 // Add the new icon file to the root of the package
