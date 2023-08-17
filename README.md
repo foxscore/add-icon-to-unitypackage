@@ -11,12 +11,13 @@ This is a simple action, that sets the icon of a UnityPackage *(see example belo
 
 ## Inputs
 
-| Required | Parameter                    | Description                                                    | Type                    | Default |
-| :------: | :--------------------------- | :------------------------------------------------------------- | :---------------------- | :------ |
-|    ✓     | `package_path`               | Path to the UnityPackage. Will be overwritten with the result. | `string`                |         |
-|    ✓     | `icon_path`                  | Path to the icon file.                                         | `string`                |         |
-|          | `package_not_found_behavior` | What to do if the package file is not found.                   | [`behavior`](#behavior) | `fail`  |
-|          | `icon_not_found_behavior`    | What to do if the icon file is not found.                      | [`behavior`](#behavior) | `fail`  |
+| Required | Parameter                       | Description                                                    | Type                    | Default |
+| :------: | :------------------------------ | :------------------------------------------------------------- | :---------------------- | :------ |
+|    ✓     | `package_path`                  | Path to the UnityPackage. Will be overwritten with the result. | `string`                |         |
+|    ✓     | `icon_path`                     | Path to the icon file.                                         | `string`                |         |
+|          | `package_not_found_behavior`    | What to do if the package file is not found.                   | [`behavior`](#behavior) | `fail`  |
+|          | `icon_not_found_behavior`       | What to do if the icon file is not found.                      | [`behavior`](#behavior) | `fail`  |
+|          | `icon_already_present_behavior` | What to do if the icon is already present.                     | [`behavior`](#behavior) | `fail`  |
 
 ### Behavior
 
@@ -38,6 +39,7 @@ Add the following snippet to your workflow file, with the appropriate parameters
     icon_path: 'path/to/your/icon.png'
     package_not_found_behavior: 'fail'
     icon_not_found_behavior: 'fail'
+    icon_already_present_behavior: 'fail'
 ```
 
 ### Example

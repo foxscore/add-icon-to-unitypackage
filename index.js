@@ -6,6 +6,8 @@ const unityPackagePath = process.env.INPUT_PACKAGE_PATH;
 let iconPath = process.env.INPUT_ICON_PATH;
 const iconNotFoundBehavior = process.env.INPUT_ICON_NOT_FOUND_BEHAVIOR;
 const packageNotFoundBehavior = process.env.INPUT_PACKAGE_NOT_FOUND_BEHAVIOR;
+const iconAlreadyPresentBehavior =
+    process.env.INPUT_ICON_ALREADY_PRESENT_BEHAVIOR;
 
 // region Validation
 console.log('Validating inputs...');
@@ -69,6 +71,12 @@ console.log(`Extracting Unity Package...`);
 let tempDir = fs.mkdtempSync('tmp_unitypackage-icon-action_');
 // Make sure the temporary directory path is absolute
 tempDir = fs.realpathSync(tempDir);
+// Get the cleanup function ready
+const cleanup = () => {
+    // Delete the temporary directory
+    console.log(`Cleaning up...`);
+    fs.rmSync(tempDir, {recursive: true});
+};
 // Extract the Unity Package (.gz) to the temporary directory
 // Keep the .tar file intact
 execSync(`gzip -d -c ${unityPackagePath} > ${tempDir}/archtemp.tar`);
@@ -86,9 +94,20 @@ const iconFile = '.icon.png';
 const stdout = execSync(`tar --list --file=${tempDir}/archtemp.tar`);
 const filenames = stdout.toString().split('\n');
 if (filenames.includes(iconFile)) {
-    // console.warn(`Found existing icon file, overwriting...`);
-    core.warning(`Found existing icon file, overwriting...`);
-    execSync(`tar --delete --file=${tempDir}/archtemp.tar '${iconFile}'`);
+    const str = `Icon already present in Unity Package: ${unityPackagePath}`;
+    switch (iconAlreadyPresentBehavior) {
+    case 'fail':
+        core.setFailed(str);
+        break;
+    case 'warn':
+        core.warning(str);
+        break;
+    case 'ignore':
+        core.info(str);
+        break;
+    }
+    cleanup();
+    return;
 }
 // Add the new icon file to the root of the package
 execSync(
@@ -109,8 +128,4 @@ fs.renameSync(`${tempDir}/archtemp.tar.gz`, unityPackagePath);
 process.chdir(previousPath);
 // endregion
 
-// region Cleanup
-// Delete the temporary directory
-console.log(`Cleaning up...`);
-fs.rmSync(tempDir, {recursive: true});
-// endregion
+cleanup();

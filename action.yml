@@ -19,6 +19,10 @@ inputs:
     description: 'What to do if the icon is not found (fail, warn, ignore)'
     required: false
     default: 'fail'
+  icon_already_present_behavior:
+    description: 'What to do if the icon is already present (fail, warn, ignore)'
+    required: false
+    default: 'fail'
 runs:
   using: 'node16'
   main: 'dist/index.js'
