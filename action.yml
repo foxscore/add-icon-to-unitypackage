@@ -1,5 +1,6 @@
 name: 'UnityPackage Icon Adder'
 description: 'Add a custom icon to a Unity package'
+author: 'Fox_score'
 branding:
   icon: 'image'
   color: 'blue'
