@@ -15,15 +15,15 @@
 |    ✓     | `icon_path`                     | Path to the icon file.                       | `string`                |         |
 |          | `package_not_found_behavior`    | What to do if the package file is not found. | [`behavior`](#behavior) | `fail`  |
 |          | `icon_not_found_behavior`       | What to do if the icon file is not found.    | [`behavior`](#behavior) | `fail`  |
-|          | `icon_already_present_behavior` | What to do if the icon is already present.   | [`behavior`](#behavior) | `fail`  |
+|          | `icon_already_present_behavior` | What to do if an icon is already present.   | [`behavior`](#behavior) | `fail`  |
 
 ### Behavior
 
-| Value | Description |
-| --- | --- |
-| `fail` | Throws an error, stops the workflow. |
-| `warn` | Prints a warning, skips this action. |
-| `ignore` | Do nothing, skip this action. |
+| Value    | Description                          |
+| -------- | ------------------------------------ |
+| `fail`   | Throws an error, stops the workflow. |
+| `warn`   | Prints a warning, skips this action. |
+| `ignore` | Do nothing, skip this action.        |
 
 ## Setup
 
