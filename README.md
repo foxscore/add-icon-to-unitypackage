@@ -1,6 +1,4 @@
-# Add Icon to UnityPackage
-
-This is a simple action, that sets the icon of a UnityPackage *(see example below)*.
+# Set UnityPackage Import Thumbnail
 
 ![example image](resources/example.png)
 
@@ -24,8 +22,8 @@ This is a simple action, that sets the icon of a UnityPackage *(see example belo
 | Value | Description |
 | --- | --- |
 | `fail` | Throws an error, stops the workflow. |
-| `warn` | Prints a warning, skips this step. |
-| `ignore` | Do nothing, skip this step. |
+| `warn` | Prints a warning, skips this action. |
+| `ignore` | Do nothing, skip this action. |
 
 ## Setup
 

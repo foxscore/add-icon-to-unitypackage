@@ -1,5 +1,5 @@
-name: 'UnityPackage Icon Adder'
-description: 'Add a custom icon to a Unity package'
+name: 'Set UnityPackage Import Thumbnail'
+description: 'Set the thumbnail that is shown when importing a UnityPackage'
 author: 'Fox_score'
 branding:
   icon: 'image'
