@@ -9,12 +9,12 @@ inputs:
   icon_path:
     description: 'Path to the icon'
     required: true
-  icon_not_found_behavior:
-    description: 'What to do if the icon is not found (fail, warn, ignore)'
-    required: false
-    default: 'fail'
   package_not_found_behavior:
     description: 'What to do if the package is not found (fail, warn, ignore)'
+    required: false
+    default: 'fail'
+  icon_not_found_behavior:
+    description: 'What to do if the icon is not found (fail, warn, ignore)'
     required: false
     default: 'fail'
 runs:
