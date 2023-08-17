@@ -1,5 +1,4 @@
 const fs = require('fs');
-const tar = require('tar');
 const core = require('@actions/core');
 const {execSync} = require('child_process');
 
@@ -84,12 +83,8 @@ console.log(`Modifying Unity Package...`);
 // Check if a ".icon.png" file exists in the root of the package
 // If it does, remove it
 const iconFile = '.icon.png';
-const filenames = [];
-tar.list({
-    file: `${tempDir}/archtemp.tar`,
-    onentry: (entry) => filenames.push(entry.path),
-    sync: true,
-});
+const stdout = execSync(`tar --list --file=${tempDir}/archtemp.tar`);
+const filenames = stdout.toString().split('\n');
 if (filenames.includes(iconFile)) {
     // console.warn(`Found existing icon file, overwriting...`);
     core.warning(`Found existing icon file, overwriting...`);
