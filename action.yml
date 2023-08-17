@@ -1,5 +1,7 @@
 name: 'UnityPackage Icon Adder'
 description: 'Add a custom icon to a Unity package'
+icon: 'image'
+color: 'blue'
 inputs:
   unitypackage_path:
     description: 'Path to the Unity package'
