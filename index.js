@@ -6,15 +6,37 @@ const tar = require('tar');
 const unityPackagePath = process.env.INPUT_UNITYPACKAGE_PATH;
 // eslint-disable-next-line no-undef
 const iconPath = process.env.INPUT_ICON_PATH;
+const iconNotFoundBehavior = process.env.INPUT_ICON_NOT_FOUND_BEHAVIOR;
+const packageNotFoundBehavior = process.env.INPUT_PACKAGE_NOT_FOUND_BEHAVIOR;
 
 // region Validation
 console.log('Validating inputs...');
+// Make sure the behaviour flags are valid
+const validBehaviors = ['fail', 'warn', 'ignore'];
+if (!validBehaviors.includes(iconNotFoundBehavior)) {
+    throw new Error(`Invalid icon not found behavior: ${iconNotFoundBehavior}`);
+}
+if (!validBehaviors.includes(packageNotFoundBehavior)) {
+    throw new Error(
+        `Invalid package not found behavior: ${packageNotFoundBehavior}`,
+    );
+}
+
 // Make sure the Icon ends with .png and exists
 if (!iconPath.endsWith('.png')) {
     throw new Error(`Icon path must end with .png: ${iconPath}`);
 }
 if (!fs.existsSync(iconPath)) {
-    throw new Error(`Icon not found at path: ${iconPath}`);
+    switch (iconNotFoundBehavior) {
+    case 'fail':
+        throw new Error(`Icon not found at path: ${iconPath}`);
+    case 'warn':
+        console.warn(`Icon not found at path: ${iconPath}`);
+        return;
+    case 'ignore':
+        console.log(`Icon not found at path: ${iconPath}`);
+        return;
+    }
 }
 
 // Make sure the Unity Package ends with .unitypackage and exists
@@ -24,7 +46,16 @@ if (!unityPackagePath.endsWith('.unitypackage')) {
     );
 }
 if (!fs.existsSync(unityPackagePath)) {
-    throw new Error(`Unity Package not found at path: ${unityPackagePath}`);
+    switch (packageNotFoundBehavior) {
+    case 'fail':
+        throw new Error(`Unity Package not found at path: ${unityPackagePath}`);
+    case 'warn':
+        console.warn(`Unity Package not found at path: ${unityPackagePath}`);
+        return;
+    case 'ignore':
+        console.log(`Unity Package not found at path: ${unityPackagePath}`);
+        return;
+    }
 }
 // endregion
 
