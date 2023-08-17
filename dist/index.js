@@ -2863,10 +2863,8 @@ const fs = __nccwpck_require__(147);
 const core = __nccwpck_require__(24);
 const {execSync} = __nccwpck_require__(81);
 
-// eslint-disable-next-line no-undef
 const unityPackagePath = process.env.INPUT_PACKAGE_PATH;
-// eslint-disable-next-line no-undef
-const iconPath = process.env.INPUT_ICON_PATH;
+let iconPath = process.env.INPUT_ICON_PATH;
 const iconNotFoundBehavior = process.env.INPUT_ICON_NOT_FOUND_BEHAVIOR;
 const packageNotFoundBehavior = process.env.INPUT_PACKAGE_NOT_FOUND_BEHAVIOR;
 
