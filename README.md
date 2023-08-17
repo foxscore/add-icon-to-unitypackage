@@ -9,8 +9,8 @@ Licensed under [GNU GPL v3 or later](https://spdx.org/licenses/GPL-3.0-or-later.
 
 | Required | Parameter                    | Description                                                    | Type                    | Default |
 | :------: | :--------------------------- | :------------------------------------------------------------- | :---------------------- | :------ |
-|    ✓     | `package_path`               | Path to the UnityPackage. Will be overwritten with the result. | string                  |         |
-|    ✓     | `icon_path`                  | Path to the icon file.                                         | string                  |         |
+|    ✓     | `package_path`               | Path to the UnityPackage. Will be overwritten with the result. | `string`                |         |
+|    ✓     | `icon_path`                  | Path to the icon file.                                         | `string`                |         |
 |          | `icon_not_found_behavior`    | What to do if the icon file is not found.                      | [`behavior`](#behavior) | `fail`  |
 |          | `package_not_found_behavior` | What to do if the package file is not found.                   | [`behavior`](#behavior) | `fail`  |
 
@@ -18,7 +18,7 @@ Licensed under [GNU GPL v3 or later](https://spdx.org/licenses/GPL-3.0-or-later.
 
 | Value | Description |
 | --- | --- |
-| `fail` *(default)* | Throws an error, stops the workflow. |
+| `fail` | Throws an error, stops the workflow. |
 | `warn` | Prints a warning, skips this step. |
 | `ignore` | Do nothing, skip this step. |
 
@@ -40,8 +40,8 @@ Add the following snippet to your workflow file, with the appropriate parameters
 
 > **Assuming that you**
 >
-> - are using the [VPM Package Template](https://github.com/vrchat-community/template-package), in which case the file to edit is `.github/workflows/release.yml`.
 > - have a file called `icon.png` in the `resources` folder.
+> - are using the [VPM Package Template](https://github.com/vrchat-community/template-package), in which case the file to edit is `.github/workflows/release.yml`.
 
 ```yml
     # [...]
