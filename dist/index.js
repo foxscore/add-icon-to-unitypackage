@@ -2983,12 +2983,10 @@ console.log(`Building Unity Package...`);
 const previousPath = process.cwd();
 process.chdir(tempDir);
 execSync(`gzip archtemp.tar`);
-// Move the Unity Package (.gz) to the original path
-if (fs.existsSync(unityPackagePath)) {
-    fs.rmSync(unityPackagePath);
-}
-fs.renameSync(`${tempDir}/archtemp.tar.gz`, unityPackagePath);
 process.chdir(previousPath);
+// Move the Unity Package (.gz) to the original path
+fs.rmSync(unityPackagePath);
+fs.renameSync(`${tempDir}/archtemp.tar.gz`, unityPackagePath);
 // endregion
 
 cleanup();
