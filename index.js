@@ -3,7 +3,7 @@ const {execSync} = require('child_process');
 const tar = require('tar');
 
 // eslint-disable-next-line no-undef
-const unityPackagePath = process.env.INPUT_UNITYPACKAGE_PATH;
+const unityPackagePath = process.env.INPUT_PACKAGE_PATH;
 // eslint-disable-next-line no-undef
 const iconPath = process.env.INPUT_ICON_PATH;
 const iconNotFoundBehavior = process.env.INPUT_ICON_NOT_FOUND_BEHAVIOR;

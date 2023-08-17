@@ -3,7 +3,7 @@ description: 'Add a custom icon to a Unity package'
 icon: 'image'
 color: 'blue'
 inputs:
-  unitypackage_path:
+  package_path:
     description: 'Path to the Unity package'
     required: true
   icon_path:
