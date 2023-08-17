@@ -8,6 +8,10 @@
     "parserOptions": {
         "ecmaVersion": "latest"
     },
+    "ignorePatterns": [
+        "node_modules/",
+        "dist/"
+    ],
     "rules": {
         "indent": [
             "error",
