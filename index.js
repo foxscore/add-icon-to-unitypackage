@@ -66,7 +66,9 @@ if (!fs.existsSync(unityPackagePath)) {
 // region Prepare
 console.log(`Extracting Unity Package...`);
 // Create a temporary directory
-const tempDir = fs.mkdtempSync('tmp_unitypackage-icon-action_');
+let tempDir = fs.mkdtempSync('tmp_unitypackage-icon-action_');
+// Make sure the temporary directory path is absolute
+tempDir = fs.realpathSync(tempDir);
 // Extract the Unity Package (.gz) to the temporary directory
 // Keep the .tar file intact
 execSync(`gzip -d -c ${unityPackagePath} > ${tempDir}/archtemp.tar`);
@@ -100,7 +102,10 @@ execSync(
 console.log(`Building Unity Package...`);
 const previousPath = process.cwd();
 process.chdir(tempDir);
-execSync(`gzip -c archtemp.tar > ${unityPackagePath}`);
+execSync(`gzip archtemp.tar`);
+// Move the Unity Package (.gz) to the original path
+fs.rmSync(unityPackagePath);
+fs.renameSync(`${tempDir}/archtemp.tar.gz`, unityPackagePath);
 process.chdir(previousPath);
 // endregion
 
