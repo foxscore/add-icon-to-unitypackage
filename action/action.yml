@@ -1,0 +1,12 @@
+name: 'UnityPackage Icon Adder'
+description: 'Add a custom icon to a Unity package'
+inputs:
+  unitypackage_path:
+    description: 'Path to the Unity package'
+    required: true
+  icon_path:
+    description: 'Path to the icon'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'

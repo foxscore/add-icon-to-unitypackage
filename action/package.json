@@ -1,0 +1,22 @@
+{
+    "name": "add-icon-to-unitypackage",
+    "version": "1.0.0",
+    "description": "Assign a custom icon to a Unity package",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": {
+        "name": "Fox_score",
+        "email": "felixkaiser2000@protonmail.com",
+        "url": "https://foxscore.dev"
+    },
+    "license": "GPL-3.0-or-later",
+    "dependencies": {
+        "tar": "^6.1.15"
+    },
+    "devDependencies": {
+        "eslint": "^8.47.0",
+        "eslint-config-google": "^0.14.0"
+    }
+}
